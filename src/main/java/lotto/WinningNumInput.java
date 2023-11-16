@@ -16,9 +16,15 @@ public class WinningNumInput {
         winningNumString = readLine();
         winningNumStringArray = winningNumString.split(",");
         for (String str : winningNumStringArray) {
-            if (winningNumArray.contains(Integer.parseInt(str))) {
-                System.out.println("[ERROR] 로또번호는 중복되면 안됩니다.");
-                throw new IllegalArgumentException();
+            try {
+                if (winningNumArray.contains(Integer.parseInt(str))) {
+                    System.out.println("[ERROR] 로또번호는 중복되면 안됩니다.");
+                    throw new IllegalArgumentException();
+                }
+            } catch (IllegalArgumentException e) {
+                winningNumString = null;
+                winningNumArray.clear();
+                winningNumber();
             }
             winningNumArray.add(Integer.parseInt(str));
         }
@@ -30,9 +36,13 @@ public class WinningNumInput {
         System.out.println();
         System.out.println("보너스 번호를 입력해 주세요.");
         bonusNumber = Integer.parseInt(readLine());
-        if (winningNumArray.contains(bonusNumber)) {
-            System.out.println("[ERROR] 보너스번호는 중복되면 안됩니다.");
-            throw new IllegalArgumentException();
+        try {
+            if (winningNumArray.contains(bonusNumber)) {
+                System.out.println("[ERROR] 보너스번호는 중복되면 안됩니다.");
+                throw new IllegalArgumentException();
+            }
+        } catch (IllegalArgumentException e) {
+            bonusNumber();
         }
     }
 }

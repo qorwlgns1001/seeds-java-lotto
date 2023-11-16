@@ -6,9 +6,10 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Lotto {
     private final List<Integer> numbers;
+    WinningNumInput winningNumInput = new WinningNumInput();
 
     public Lotto(List<Integer> numbers) {
-        WinningNumInput winningNumInput = new WinningNumInput();
+
         validate(numbers);
         this.numbers = numbers;
     }
@@ -20,10 +21,12 @@ public class Lotto {
         }
 
         for (int i = 0; i < numbers.size(); i++) {
-            for (int j = i; j < numbers.size(); j++) {
+            for (int j = i + 1; j < numbers.size(); j++) {
+
                 if (numbers.get(i).equals(numbers.get(j))) {
                     System.out.println("[ERROR] 로또 번호가 중복됩니다.");
                     throw new IllegalArgumentException();
+
                 }
             }
         }
